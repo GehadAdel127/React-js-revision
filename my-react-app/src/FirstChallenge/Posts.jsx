@@ -1,18 +1,12 @@
 import Post from './Post'
 import "./Posts.css"
 const Posts = () => {
+    const postsArray = Array.from({length : 10})
   return (
     <div className={'posts'}>
-        <Post />
-        <Post />
-        <Post />
-        <Post />
-        <Post />
-        <Post />
-        <Post />
-        <Post />
-        <Post />
-        <Post />
+        {postsArray.map((_,index) => (
+            <Post key={index}/>
+        ))}
     </div>
   )
 }

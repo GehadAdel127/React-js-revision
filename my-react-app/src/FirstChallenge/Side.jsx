@@ -2,19 +2,12 @@ import Button from './Button'
 import "./Side.css"
 
 const Side = () => {
+    const buttonsArray = Array.from({length : 10})
   return (
     <div className={"side"}>
-        <Button />
-        <Button />
-        <Button />
-        <Button />
-        <Button />
-        <Button />
-        <Button />
-        <Button />
-        <Button />
-        <Button />
-        <Button />
+        {buttonsArray.map((_,index) => (
+            <Button key={index} />
+        ))}
     </div>
   )
 }
