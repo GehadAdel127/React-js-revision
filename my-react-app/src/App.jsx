@@ -1,13 +1,17 @@
 import './App.css'
-import MyFirstComponent from './MyFirstcomponent'
+import Header from './FirstChallenge/Header'
+import Posts from './FirstChallenge/Posts'
+import Side from './FirstChallenge/side'
 
 
 function App() {
 
   return (
-    <>
-    <MyFirstComponent />
-    </>
+    <div className= {"app"}>
+      <Header />
+      <Side />
+      <Posts />
+    </div>
   )
 }
 
