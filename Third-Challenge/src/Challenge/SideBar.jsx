@@ -23,7 +23,8 @@ const SideBar = () => {
     }
   ]
   const buttonList = buttonInfo.map((button) => {
-    return(<Button title = {button.title} key={button.id}>
+    return(
+    <Button title = {button.title} key={button.id}>
       <h4>{button.icon}</h4>
       {button.imageSrc && (<img src= {button.imageSrc} alt="flower" style={{width : "100px" , height : "100px"}}/> )}
     </Button>)
