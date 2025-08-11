@@ -6,11 +6,28 @@ const Exercise = () => {
   //     setValue(event.target.value)
   const [devices, setDevices] = useState(["iPhone", "Samsung", "LG", "Mac"])
   const [inputValue, setInputValue] = useState("")
-  const devicesList = devices.map((device) => {
+  const devicesList = devices.map((device, index) => {
     return (
-      <li>{device}</li>
+      <li key={index}>{device}
+        <button onClick={() => { handleDelete(index) }}>Delete</button>
+        <button onClick={() => {
+          const newName = prompt(devices[index])
+          handleEdit(index, newName)
+        }}>Edit</button>
+      </li>
     )
   })
+  function handleDelete(index) {
+    devices.splice(index, 1)
+    setDevices([...devices])
+  }
+  function handleEdit(index, newName) {
+    const updateDevices = [...devices]
+    if (newName != "") {
+      updateDevices[index] = newName
+      setDevices(updateDevices)
+    }
+  }
   return (
     <div>
       <ul>{devicesList}</ul>
