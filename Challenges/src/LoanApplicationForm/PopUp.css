@@ -1,0 +1,21 @@
+.PopUpContent {
+    background-color: #A6B28B;
+    color: #1C352D;
+    border-radius: 10px;
+    border: none;
+    padding: 20px;
+    width: 80%;
+}
+
+.popUp {
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: #0000008f;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}

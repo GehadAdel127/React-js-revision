@@ -1,0 +1,54 @@
+form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 7px;
+    width: 80%;
+    background-color: #A6B28B;
+    color: #1C352D;
+    border-radius: 20px;
+    font-size: 22px;
+    padding: 50px;
+}
+
+form hr {
+    width: 98%;
+    color: #A6B28B;
+    padding: 0;
+    margin: 10px;
+}
+
+form input,
+form select {
+    width: 90%;
+    border-radius: 10px;
+    padding: 15px 10px;
+    border: 2px solid #1C352D;
+    font-size: 16px;
+}
+
+form input:focus,
+form select {
+    outline: none;
+    border: 2px solid #F5C9B0;
+}
+
+form button {
+    width: 200px;
+    padding: 15px 20px;
+    border-radius: 10px;
+    border: 2px solid #1C352D;
+    outline: none;
+    background-color: #A6B28B;
+    transition: background-color 0.5s ease, color 0.5s ease;
+    cursor: pointer;
+    color: #1C352D;
+    font-size: 20px;
+    margin-top: 10px;
+}
+
+form button:hover {
+    background-color: #1C352D;
+    color: #A6B28B;
+}
