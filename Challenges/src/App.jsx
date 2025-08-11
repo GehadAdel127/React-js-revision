@@ -1,11 +1,11 @@
 import './App.css'
-import Exercise from "./Practice/Exercise"
+import ReactChallenge from "./ForthChallenge/ReactChallenge"
 
 function App() {
 
   return (
     <div className={"app"}>
-      <Exercise />
+      <ReactChallenge />
     </div>
   )
 }
