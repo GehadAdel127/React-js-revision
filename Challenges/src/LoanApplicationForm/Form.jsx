@@ -7,43 +7,56 @@ const Form = () => {
         phoneNumber: "",
         age: "",
         isEmployee: false,
-        salary: "more than 5000"
+        salary: ""
     })
     const [showPopUp, setShowPopUp] = useState(false)
     const [popUpMessage, setPopUpMessage] = useState("")
-    function validateForm(formInfo) {
-        if (formInfo.name.trim() &&
-            formInfo.phoneNumber.length >= 12 &&
-            formInfo.phoneNumber.length <= 14 &&
-            formInfo.age >= 18 &&
-            formInfo.age < 100 &&
-            formInfo.isEmployee &&
-            formInfo.salary) {
-            return true
-        }
+    function validateForm(info) {
+        return (
+            info.name.trim() &&
+            info.phoneNumber.length >= 10 &&
+            info.phoneNumber.length <= 14 &&
+            Number(info.age) >= 18 &&
+            Number(info.age) < 100 &&
+            info.isEmployee &&
+            info.salary
+        )
     }
     function handleSubmitClick(event) {
-        const isValid = validateForm(formInfo)
         event.preventDefault()
+        const isValid = validateForm(formInfo)
+
         if (isValid) {
-            setPopUpMessage("The form has been submmited Successfully!")
-        } else if (!formInfo.name.trim()) {
-            setPopUpMessage("The name should be enterd!")
-        } else if (formInfo.phoneNumber.length < 12) {
-            setPopUpMessage("The phone number should be between 12 numbers or 14 numbers!")
-        } else if (formInfo.phoneNumber.length > 14) {
-            setPopUpMessage("The phone number should be between 12 numbers or 14 numbers!")
-        } else if (formInfo.age < 18 || formInfo.age > 100) {
-            setPopUpMessage("The age should be between 18 and 100 years old!")
-        } else if (!formInfo.isEmployee) {
-            setPopUpMessage("You should tell us you're employee or not!")
-        } else if (!formInfo.salary) {
-            setPopUpMessage("We should know exactly you're salary!")
+            setPopUpMessage("The form has been submitted successfully!")
+        } else {
+            if (!formInfo.name.trim()) {
+                setPopUpMessage("The name should be entered!")
+            } else if (
+                formInfo.phoneNumber.length < 10 ||
+                formInfo.phoneNumber.length > 14
+            ) {
+                setPopUpMessage("The phone number should be between 10 and 14 digits!")
+            } else if (
+                Number(formInfo.age) < 18 ||
+                Number(formInfo.age) > 100
+            ) {
+                setPopUpMessage("The age should be between 18 and 100 years old!")
+            } else if (!formInfo.isEmployee) {
+                setPopUpMessage("Please let us know whether you're an employee.")
+            } else if (!formInfo.salary) {
+                setPopUpMessage("Please select your salary.")
+            }
         }
+
         setShowPopUp(true)
     }
+    function handleShowPopUp() {
+        if (showPopUp) {
+            setShowPopUp(false)
+        }
+    }
     return (
-        <div>
+        <div onClick={handleShowPopUp}>
             <form>
                 <h1>Requesting a Loan</h1>
                 <hr />
@@ -61,14 +74,16 @@ const Form = () => {
 
                 <label htmlFor="salary">Salary : </label>
                 <select name="salary" id="salary" value={formInfo.salary} onChange={(event) => { setFormInfo({ ...formInfo, salary: event.target.value }) }}  >
+                    <option value="">-- Select Salary --</option>
                     <option value="more than 5000">more than 5000</option>
                     <option value="more than 10000">more than 10000</option>
                     <option value="more than 15000">more than 15000</option>
                 </select>
 
-                <button type="submit" onClick={(e) => {
-                    handleSubmitClick(e)
-                }}>Submit</button>
+                <button type="submit" className={validateForm(formInfo) ? "" : "disabled"}
+                    disabled={!validateForm(formInfo)} onClick={(e) => {
+                        handleSubmitClick(e)
+                    }}>Submit</button>
             </form>
             {showPopUp && <PopUp message={popUpMessage} />}
         </div>
