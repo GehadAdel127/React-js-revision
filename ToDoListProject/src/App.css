@@ -1,0 +1,29 @@
+.btnhover {
+    transition: all 0.3s ease !important;
+}
+
+.check:hover {
+    background-color: #4caf50 !important;
+    color: white !important;
+    box-shadow: 0 5px 5px #4caf50;
+}
+
+.edit:hover {
+    background-color: #1769aa !important;
+    color: white !important;
+    box-shadow: 0 5px 5px #1769aa;
+}
+
+.delete:hover {
+    background-color: #b23c17 !important;
+    color: white !important;
+    box-shadow: 0 5px 5px #b23c17;
+}
+
+.todoCard {
+    transition: all 0.3s ease !important;
+}
+
+.todoCard:hover {
+    box-shadow: 0 5px 5px #C0C9EE;
+}

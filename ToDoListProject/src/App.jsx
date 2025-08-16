@@ -1,14 +1,12 @@
-import { useState } from 'react'
 import './App.css'
 import ToDoList from './Components/ToDoList'
 
 function App() {
-  const [count, setCount] = useState(0)
 
   return (
-    <>
+    <div style={{ height: "100vh", display: "flex", justifyContent: "center", alignItems: "center", backgroundColor: "#898AC4" }}>
       <ToDoList />
-    </>
+    </div>
   )
 }
 
