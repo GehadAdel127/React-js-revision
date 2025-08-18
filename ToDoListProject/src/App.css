@@ -1,3 +1,8 @@
+body {
+    background-color: #C1D8C3;
+    font-family: "Alexandria";
+}
+
 .btnhover {
     transition: all 0.3s ease !important;
 }
@@ -25,5 +30,37 @@
 }
 
 .todoCard:hover {
-    box-shadow: 0 5px 5px #C0C9EE;
+    box-shadow: 0 5px 5px #C1D8C3;
+}
+
+
+/* font */
+@font-face {
+    font-family: "Alexandria";
+    src: url('./assets/fonts/Alexandria-Black.ttf');
+    font-weight: 900;
+}
+
+@font-face {
+    font-family: "Alexandria";
+    src: url('./assets/fonts/Alexandria-Bold.ttf');
+    font-weight: 700;
+}
+
+@font-face {
+    font-family: "Alexandria";
+    src: url('./assets/fonts/Alexandria-Medium.ttf');
+    font-weight: 500;
+}
+
+@font-face {
+    font-family: "Alexandria";
+    src: url('./assets/fonts/Alexandria-Regular.ttf');
+    font-weight: 400;
+}
+
+@font-face {
+    font-family: "Alexandria";
+    src: url('./assets/fonts/Alexandria-Thin.ttf');
+    font-weight: 100;
 }
