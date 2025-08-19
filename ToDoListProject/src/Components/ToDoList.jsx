@@ -9,8 +9,10 @@ import ToggleButton from '@mui/material/ToggleButton';
 import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
 import Typography from '@mui/material/Typography';
 import { useContext, useState } from 'react';
+import { v4 as uuidv4 } from 'uuid';
 import { TodosContext } from '../Context/TodosContext';
 import ToDo from './ToDo';
+
 
 
 const ToDoList = () => {
@@ -27,7 +29,9 @@ const ToDoList = () => {
             details: "",
             isCompleted: false
         }
-        setTodos([...todos, newTodo])
+        const updatedTodos = [...todos, newTodo]
+        setTodos(updatedTodos)
+        localStorage.setItem("todos", JSON.stringify(updatedTodos))
         setTitle("")
     }
     return (
