@@ -27,6 +27,7 @@ const ToDo = ({ todo }) => {
             return t
         })
         setTodos(checkedTodos)
+        localStorage.setItem("todos", JSON.stringify(checkedTodos))
     }
 
     const [openDeleteDialog, setOpenDeleteDialog] = useState(false)
@@ -50,6 +51,7 @@ const ToDo = ({ todo }) => {
             return t.id != todo.id
         })
         setTodos(updatedTodos)
+        localStorage.setItem("todos", JSON.stringify(updatedTodos))
     }
     function handleUpdateSubmit() {
         const updatedTasks = todos.map((t) => {
@@ -61,6 +63,7 @@ const ToDo = ({ todo }) => {
         })
         setTodos(updatedTasks)
         setOpenEditDialog(false)
+        localStorage.setItem("todos", JSON.stringify(updatedTasks))
     }
     return (
         <>

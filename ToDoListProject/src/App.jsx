@@ -15,28 +15,28 @@ function App() {
   const initialTodos = [
     {
       id: uuidv4(),
-      title: "كتابة مجموعة من الأكواد",
-      details: "كتابة مجموعة من الأكوادكتابة مجموعة من الأكواد",
+      title: "",
+      details: "",
       isCompleted: false
     },
-    {
-      id: uuidv4(),
-      title: "كتابة مجموعة من الأكواد",
-      details: "كتابة مجموعة من الأكوادكتابة مجموعة من الأكواد",
-      isCompleted: false
-    },
-    {
-      id: uuidv4(),
-      title: "كتابة مجموعة من الأكواد",
-      details: "كتابة مجموعة من الأكوادكتابة مجموعة من الأكواد",
-      isCompleted: false
-    },
-    {
-      id: uuidv4(),
-      title: "كتابة مجموعة من الأكواد",
-      details: "كتابة مجموعة من الأكوادكتابة مجموعة من الأكواد",
-      isCompleted: false
-    }
+    // {
+    //   id: uuidv4(),
+    //   title: "كتابة مجموعة من الأكواد",
+    //   details: "كتابة مجموعة من الأكوادكتابة مجموعة من الأكواد",
+    //   isCompleted: false
+    // },
+    // {
+    //   id: uuidv4(),
+    //   title: "كتابة مجموعة من الأكواد",
+    //   details: "كتابة مجموعة من الأكوادكتابة مجموعة من الأكواد",
+    //   isCompleted: false
+    // },
+    // {
+    //   id: uuidv4(),
+    //   title: "كتابة مجموعة من الأكواد",
+    //   details: "كتابة مجموعة من الأكوادكتابة مجموعة من الأكواد",
+    //   isCompleted: false
+    // }
   ]
   const [todos, setTodos] = useState(initialTodos)
   return (

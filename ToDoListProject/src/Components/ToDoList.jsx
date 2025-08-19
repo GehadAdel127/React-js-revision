@@ -8,7 +8,7 @@ import TextField from '@mui/material/TextField';
 import ToggleButton from '@mui/material/ToggleButton';
 import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
 import Typography from '@mui/material/Typography';
-import { useContext, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import { TodosContext } from '../Context/TodosContext';
 import ToDo from './ToDo';
@@ -18,22 +18,52 @@ import ToDo from './ToDo';
 const ToDoList = () => {
     const { todos, setTodos } = useContext(TodosContext)
     const [title, setTitle] = useState("")
-    const todoJsx = todos.map((t) => {
-        return <ToDo key={t.id} todo={t} />
+    const [details, setDetails] = useState("")
+    const [displayTodosType, setDisplayTodosType] = useState("all")
+
+    const completedTodos = todos.filter((t) => {
+        return t.isCompleted
     })
 
+    const unCompletedTodos = todos.filter((t) => {
+        return !t.isCompleted
+    })
+    function changeTodosType(e) {
+        return setDisplayTodosType(e.target.value)
+    }
+
+    let todosRendered = todos
+    if (displayTodosType == "all") {
+        todosRendered = todos
+    } else if (displayTodosType == "completed") {
+        todosRendered = completedTodos
+    } else if (displayTodosType == "unCompleted") {
+        todosRendered = unCompletedTodos
+    } else {
+        todosRendered = todos
+    }
+    const todoJsx = todosRendered.map((t) => {
+        return <ToDo key={t.id} todo={t} />
+    })
     function handleAddClick() {
         const newTodo = {
             id: uuidv4(),
             title: title,
-            details: "",
+            details: details,
             isCompleted: false
         }
         const updatedTodos = [...todos, newTodo]
-        setTodos(updatedTodos)
-        localStorage.setItem("todos", JSON.stringify(updatedTodos))
-        setTitle("")
+        if (newTodo.title.trim() && newTodo.details.trim()) {
+            setTodos(updatedTodos)
+            localStorage.setItem("todos", JSON.stringify(updatedTodos))
+            setTitle("")
+            setDetails("")
+        }
     }
+    useEffect(() => {
+        const storageTodos = JSON.parse(localStorage.getItem("todos")) || []
+        setTodos(storageTodos)
+    }, [])
     return (
 
         <>
@@ -46,19 +76,19 @@ const ToDoList = () => {
                         <Divider />
                         {/* toggle buttons */}
                         <ToggleButtonGroup
-                            // value={alignment}
+                            value={displayTodosType}
                             exclusive
-                            // onChange={handleAlignment}
+                            onChange={changeTodosType}
                             aria-label="text alignment"
                             style={{ marginTop: "20px", direction: "ltr" }}
                         >
-                            <ToggleButton value="left" aria-label="left aligned">
+                            <ToggleButton value="unCompleted" aria-label="left aligned">
                                 الغير منجز
                             </ToggleButton>
-                            <ToggleButton value="center" aria-label="centered">
+                            <ToggleButton value="completed" aria-label="centered">
                                 المنجز
                             </ToggleButton>
-                            <ToggleButton value="right" aria-label="right aligned">
+                            <ToggleButton value="all" aria-label="right aligned">
                                 الكل
                             </ToggleButton>
 
@@ -71,11 +101,13 @@ const ToDoList = () => {
 
                         {/* adding todo button */}
                         <Grid container spacing={2} style={{ marginTop: "20px" }}>
-                            <Grid size={8} sx={{ textAlign: "right" }}>
-                                <TextField value={title} onChange={(e) => setTitle(e.target.value)} id="outlined-basic" label="مهمهة جديدة" variant="outlined" style={{ width: "100%" }} />
+                            <Grid size={12} sx={{ textAlign: "right" }}>
+                                <TextField value={title} onChange={(e) => setTitle(e.target.value)} id="outlined-basic" label="مهمة جديدة" variant="outlined" style={{ width: "100%" }} />
+                                <TextField value={details} onChange={(e) => setDetails(e.target.value)} id="outlined-basic" label="تفاصيل المهمه" variant="outlined" style={{ width: "100%", marginTop: "10px" }} />
+
                             </Grid>
-                            <Grid size={4} display="flex" justifyContent="space-around" alignItems="center">
-                                <Button onClick={() => { handleAddClick() }} variant="contained" style={{ width: "100%", height: "100%", backgroundColor: "#CD5C08" }}>إضافة</Button>
+                            <Grid size={4} style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
+                                <Button onClick={() => { handleAddClick() }} variant="contained" style={{ width: "100%", padding: "20px", backgroundColor: "#CD5C08" }}>إضافة</Button>
                             </Grid>
                         </Grid>
                     </CardContent>
