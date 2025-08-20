@@ -8,7 +8,7 @@ import TextField from '@mui/material/TextField';
 import ToggleButton from '@mui/material/ToggleButton';
 import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
 import Typography from '@mui/material/Typography';
-import { useContext, useEffect, useState } from 'react';
+import { useContext, useEffect, useMemo, useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import { TodosContext } from '../Context/TodosContext';
 import ToDo from './ToDo';
@@ -21,13 +21,17 @@ const ToDoList = () => {
     const [details, setDetails] = useState("")
     const [displayTodosType, setDisplayTodosType] = useState("all")
 
-    const completedTodos = todos.filter((t) => {
-        return t.isCompleted
-    })
+    const completedTodos = useMemo(() => {
+        return todos.filter((t) => {
+            return t.isCompleted
+        })
+    }, [todos])
 
-    const unCompletedTodos = todos.filter((t) => {
-        return !t.isCompleted
-    })
+    const unCompletedTodos = useMemo(() => {
+        return todos.filter((t) => {
+            return !t.isCompleted
+        })
+    }, [todos])
     function changeTodosType(e) {
         return setDisplayTodosType(e.target.value)
     }
