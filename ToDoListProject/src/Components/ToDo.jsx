@@ -128,57 +128,33 @@ const ToDo = ({ todo }) => {
                     </Button>
                 </DialogActions>
             </Dialog>
-            {/* <Dialog
-                open={openEditDialog}
-                onClose={handleCloseEdit}
-                aria-labelledby="alert-dialog-title"
-                aria-describedby="alert-dialog-description"
-                style={{ direction: "rtl", width: "100%" }}
-            >
-                <DialogTitle id="alert-dialog-title">
-                    {"تعديل المهمه"}
-                </DialogTitle>
-                <DialogContent>
-                    <TextField value={updatedTask.title} onChange={(e) => setUpdatedTask({ ...updatedTask, title: e.target.value })} id="standard-basic" name='عنوان المهمه' fullWidth label="عنوان المهمه" variant="standard" style={{ width: "100%" }} />
-                </DialogContent>
-
-                <DialogContent>
-                    <TextField value={updatedTask.details} onChange={(e) => setUpdatedTask({ ...updatedTask, details: e.target.value })} id="standard-basic" label="التفاصيل" variant="standard" style={{ width: "100%" }} />
-                </DialogContent>
-                <DialogActions>
-                    <Button onClick={handleCloseEdit}>إلغاء</Button>
-                    <Button onClick={handleUpdateSubmit} autoFocus style={{ color: "#b23c17" }}>
-                        تعديل
-                    </Button>
-                </DialogActions>
-            </Dialog> */}
             <Card className='todoCard' sx={{ minWidth: 275, backgroundColor: "#C1D8C3", marginTop: 2 }}>
                 <CardContent>
 
                     {/* grid layout */}
-                    <Grid container spacing={2}>
+                    <Grid container spacing={1}>
                         <Grid size={8} sx={{ textAlign: "right" }}>
-                            <Typography variant='h5' style={{ fontWeight: 400, fontSize: "20px" }}>
+                            <Typography variant='h5' style={{ fontWeight: 400, fontSize: "20px", textDecoration: todo.isCompleted ? "line-through" : "none" }}>
                                 {todo.title}
                             </Typography>
-                            <Typography variant='h6' style={{ fontWeight: 400, fontSize: "12px" }}>
+                            <Typography variant='h6' style={{ fontWeight: 400, fontSize: "12px", textDecoration: todo.isCompleted ? "line-through" : "none" }}>
                                 {todo.details}
                             </Typography>
                         </Grid>
-                        <Grid size={4} display="flex" justifyContent="space-around" alignItems="center">
-                            <IconButton onClick={handleCheckClick} className='btnhover check' aria-label="check" style={{ border: "1px solid #4caf50", backgroundColor: todo.isCompleted ? "#4caf50" : "white", color: todo.isCompleted ? "white" : "#4caf50" }}>
+                        <Grid size={4} gap="2px" display="flex" justifyContent="space-around" alignItems="center">
+                            <IconButton onClick={handleCheckClick} className='btnhover check' aria-label="check" style={{ padding: "3px", border: "1px solid #4caf50", backgroundColor: todo.isCompleted ? "#4caf50" : "white", color: todo.isCompleted ? "white" : "#4caf50" }}>
                                 <CheckIcon />
                             </IconButton>
-                            <IconButton onClick={handleEditClick} className='btnhover edit' aria-label="edit" style={{ border: "1px solid #1769aa", backgroundColor: "white", color: "#1769aa" }}>
+                            <IconButton onClick={handleEditClick} className='btnhover edit' aria-label="edit" style={{ padding: "3px", border: "1px solid #1769aa", backgroundColor: "white", color: "#1769aa" }}>
                                 <EditIcon />
                             </IconButton>
-                            <IconButton onClick={handleDeleteClick} className='btnhover delete' aria-label="delete" style={{ border: "1px solid #b23c17", backgroundColor: "white", color: "#b23c17" }}>
+                            <IconButton onClick={handleDeleteClick} className='btnhover delete' aria-label="delete" style={{ padding: "3px", border: "1px solid #b23c17", backgroundColor: "white", color: "#b23c17" }}>
                                 <DeleteIcon />
                             </IconButton>
                         </Grid>
                     </Grid>
                 </CardContent>
-            </Card>
+            </Card >
         </>
     )
 }

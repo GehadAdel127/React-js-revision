@@ -68,7 +68,7 @@ const ToDoList = () => {
 
         <>
             <Container maxWidth="sm" style={{ textAlign: "center", direction: "rtl", marginTop: "50px" }}>
-                <Card sx={{ minWidth: 275 }}>
+                <Card sx={{ minWidth: 275, overflow: "scroll", maxHeight: '520px', scrollbarColor: "white white" }}>
                     <CardContent>
                         <Typography variant='h2' style={{ color: "#CD5C08", fontWeight: 500 }}>
                             مهامي
@@ -81,6 +81,7 @@ const ToDoList = () => {
                             onChange={changeTodosType}
                             aria-label="text alignment"
                             style={{ marginTop: "20px", direction: "ltr" }}
+                            color='primary'
                         >
                             <ToggleButton value="unCompleted" aria-label="left aligned">
                                 الغير منجز
@@ -106,8 +107,8 @@ const ToDoList = () => {
                                 <TextField value={details} onChange={(e) => setDetails(e.target.value)} id="outlined-basic" label="تفاصيل المهمه" variant="outlined" style={{ width: "100%", marginTop: "10px" }} />
 
                             </Grid>
-                            <Grid size={4} style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
-                                <Button onClick={() => { handleAddClick() }} variant="contained" style={{ width: "100%", padding: "20px", backgroundColor: "#CD5C08" }}>إضافة</Button>
+                            <Grid size={4} style={{ display: "flex", justifyContent: "center", alignItems: "center", width: "100%" }}>
+                                <Button disabled={title.length == 0 || details.length == 0} onClick={() => { handleAddClick() }} variant="contained" style={{ width: "50%", padding: "20px", margin: "0 auto" }}>إضافة</Button>
                             </Grid>
                         </Grid>
                     </CardContent>

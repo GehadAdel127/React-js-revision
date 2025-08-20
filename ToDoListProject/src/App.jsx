@@ -1,6 +1,5 @@
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { useState } from 'react';
-import { v4 as uuidv4 } from 'uuid';
 import './App.css';
 import ToDoList from './Components/ToDoList';
 import { TodosContext } from "./Context/TodosContext";
@@ -10,34 +9,14 @@ function App() {
   const theme = createTheme({
     typography: {
       fontFamily: ["Alexandria"]
+    },
+    palette: {
+      primary: {
+        main: "#CD5C08"
+      }
     }
   });
-  const initialTodos = [
-    {
-      id: uuidv4(),
-      title: "",
-      details: "",
-      isCompleted: false
-    },
-    // {
-    //   id: uuidv4(),
-    //   title: "كتابة مجموعة من الأكواد",
-    //   details: "كتابة مجموعة من الأكوادكتابة مجموعة من الأكواد",
-    //   isCompleted: false
-    // },
-    // {
-    //   id: uuidv4(),
-    //   title: "كتابة مجموعة من الأكواد",
-    //   details: "كتابة مجموعة من الأكوادكتابة مجموعة من الأكواد",
-    //   isCompleted: false
-    // },
-    // {
-    //   id: uuidv4(),
-    //   title: "كتابة مجموعة من الأكواد",
-    //   details: "كتابة مجموعة من الأكوادكتابة مجموعة من الأكواد",
-    //   isCompleted: false
-    // }
-  ]
+  const initialTodos = []
   const [todos, setTodos] = useState(initialTodos)
   return (
     <ThemeProvider theme={theme}>
