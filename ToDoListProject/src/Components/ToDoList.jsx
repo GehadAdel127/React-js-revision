@@ -15,6 +15,7 @@ import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
 import Typography from '@mui/material/Typography';
 import { useContext, useEffect, useMemo, useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
+import { ToastContext } from '../Context/ToastContext';
 import { TodosContext } from '../Context/TodosContext';
 import ToDo from './ToDo';
 
@@ -24,13 +25,14 @@ const ToDoList = () => {
     const [openDeleteDialog, setOpenDeleteDialog] = useState(false)
     const [openEditDialog, setOpenEditDialog] = useState(false)
     const [deleteId, setDeleteId] = useState(null)
-    const [editeId, setEditId] = useState(null)
+    const [editId, setEditId] = useState(null)
     const [updatedTask, setUpdatedTask] = useState({ title: "", details: "" })
     const { todos, setTodos } = useContext(TodosContext)
     const [title, setTitle] = useState("")
     const [details, setDetails] = useState("")
     const [displayTodosType, setDisplayTodosType] = useState("all")
 
+    const { showHideToast } = useContext(ToastContext)
     const completedTodos = useMemo(() => {
         return todos.filter((t) => {
             return t.isCompleted
@@ -72,6 +74,7 @@ const ToDoList = () => {
             localStorage.setItem("todos", JSON.stringify(updatedTodos))
             setTitle("")
             setDetails("")
+            showHideToast("تمت إضافة المهمه بنجاح")
         }
     }
     useEffect(() => {
@@ -94,10 +97,11 @@ const ToDoList = () => {
         setTodos(updatedTodos)
         localStorage.setItem("todos", JSON.stringify(updatedTodos))
         setOpenDeleteDialog(false)
+        showHideToast("تم حذف المهمه بنجاح")
     }
     function handleUpdateSubmit() {
         const updatedTasks = todos.map((t) => {
-            if (editeId == t.id) {
+            if (editId == t.id) {
                 return { ...t, title: updatedTask.title, details: updatedTask.details }
             } else {
                 return t
@@ -106,6 +110,7 @@ const ToDoList = () => {
         setTodos(updatedTasks)
         setOpenEditDialog(false)
         localStorage.setItem("todos", JSON.stringify(updatedTasks))
+        showHideToast("تم تعديل المهمه بنجاح")
     }
     return (
 
@@ -208,12 +213,18 @@ const ToDoList = () => {
                         {/* adding todo button */}
                         <Grid container spacing={2} style={{ marginTop: "20px" }}>
                             <Grid size={12} sx={{ textAlign: "right" }}>
-                                <TextField value={title} onChange={(e) => setTitle(e.target.value)} id="outlined-basic" label="مهمة جديدة" variant="outlined" style={{ width: "100%" }} />
-                                <TextField value={details} onChange={(e) => setDetails(e.target.value)} id="outlined-basic" label="تفاصيل المهمه" variant="outlined" style={{ width: "100%", marginTop: "10px" }} />
+                                <TextField value={title}
+                                    onChange={(e) => setTitle(e.target.value)} id="outlined-basic"
+                                    label="مهمة جديدة" variant="outlined" style={{ width: "100%" }} />
+                                <TextField value={details}
+                                    onChange={(e) => setDetails(e.target.value)} id="outlined-basic"
+                                    label="تفاصيل المهمه" variant="outlined" style={{ width: "100%", marginTop: "10px" }} />
 
                             </Grid>
                             <Grid size={4} style={{ display: "flex", justifyContent: "center", alignItems: "center", width: "100%" }}>
-                                <Button disabled={title.length == 0 || details.length == 0} onClick={() => { handleAddClick() }} variant="contained" style={{ width: "50%", padding: "20px", margin: "0 auto" }}>إضافة</Button>
+                                <Button disabled={title.length == 0 || details.length == 0}
+                                    onClick={() => { handleAddClick() }} variant="contained"
+                                    style={{ width: "50%", padding: "20px", margin: "0 auto" }}>إضافة</Button>
                             </Grid>
                         </Grid>
                     </CardContent>
