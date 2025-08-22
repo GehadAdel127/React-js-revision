@@ -7,13 +7,13 @@ import Grid from '@mui/material/Grid';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import { useContext } from 'react';
-import { ToastContext } from '../Context/ToastContext';
+import { useToast } from '../Context/ToastContext';
 import { TodosContext } from '../Context/TodosContext';
 
 
 const ToDo = ({ todo, handleEditClick, handleDeleteClick }) => {
     const { todos, setTodos } = useContext(TodosContext)
-    const { showHideToast } = useContext(ToastContext)
+    const { showHideToast } = useToast()
 
     function handleCheckClick() {
         const checkedTodos = todos.map((t) => {
@@ -24,7 +24,7 @@ const ToDo = ({ todo, handleEditClick, handleDeleteClick }) => {
         })
         setTodos(checkedTodos)
         localStorage.setItem("todos", JSON.stringify(checkedTodos))
-        showHideToast("تم إنهاء المهمه بنجاح")
+        showHideToast("تم تعديل المهمه بنجاح")
     }
 
     function handleEditDialog(todo) {

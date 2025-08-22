@@ -15,7 +15,7 @@ import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
 import Typography from '@mui/material/Typography';
 import { useContext, useEffect, useMemo, useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
-import { ToastContext } from '../Context/ToastContext';
+import { useToast } from '../Context/ToastContext';
 import { TodosContext } from '../Context/TodosContext';
 import ToDo from './ToDo';
 
@@ -32,7 +32,7 @@ const ToDoList = () => {
     const [details, setDetails] = useState("")
     const [displayTodosType, setDisplayTodosType] = useState("all")
 
-    const { showHideToast } = useContext(ToastContext)
+    const { showHideToast } = useToast()
     const completedTodos = useMemo(() => {
         return todos.filter((t) => {
             return t.isCompleted
